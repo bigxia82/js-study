@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生成坐标</title>
+    <style>
+        div{width: 50px; height: 50px; line-height:50px; text-align:center; color:#fff;background-color: brown;position: absolute;}
+    </style>
+</head>
+<body>
+<script>
+
+    var divs=document.getElementsByTagName('div');
+    //创建div
+    for (var i = 0; i < 11; i++) {
+        document.body.innerHTML+=`<div>${i+1}</div>`;
+
+    }
+    //生成坐标
+
+    var middle=0;
+    for (var j= 0; j < divs.length; j++) {
+
+        if(j<6){
+            divs[j].style.left=(j+1)*50+'px';
+            divs[j].style.top=(j+1)*50+'px';
+            middle+=50;
+        }
+        else {
+           divs[j].style.left=(j+1)*50+'px';
+           divs[j].style.top=(middle-(j-5)*50)+'px'
+
+
+        }
+
+
+
+    }
+
+</script>
+</body>
+</html>
