@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生成v形</title>
+    <style>
+        div{
+            width: 50px; height: 50px; line-height: 50px; text-align: center; color: #fff; background-color: crimson;position: absolute;
+        }
+    </style>
+</head>
+<body>
+<script>
+    window.onload=function () {
+        var middle=0;
+        //生成11个div
+        for (var i = 0; i <11 ; i++) {
+
+            document.body.innerHTML+=`<div>${i+1}</div>`;
+
+
+        }
+        var divs=document.getElementsByTagName('div');
+        console.log(divs);
+        for (var i = 0; i <divs.length ; i++) {
+            if(i<6){
+                divs[i].style.left=i*50+'px';
+                divs[i].style.top=i*50+'px';
+                middle+=50;
+            }
+            else
+            {
+                divs[i].style.left=i*50+'px';
+                divs[i].style.top=middle-(i-4)*50+'px';
+            }
+
+        }
+    }
+
+
+</script>
+</body>
+</html>
