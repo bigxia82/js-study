@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        .wrap{
+            width: 1000px;
+            height: 800px;
+            background: url(pic-img/bg.jpg) no-repeat;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -500px;
+            margin-top: -400px;
+        }
+        #prev,#next{
+            position: absolute;
+            width: 25px;
+            height: 45px;
+            background: url(pic-img/ar.png) no-repeat;
+
+            top: 155px;
+        }
+        #prev{
+            left: 13px;
+        }
+        #next{
+            transform: rotate(180deg);
+            right: 13px;
+        }
+        .pic{
+            width: 536px;
+            height: 356px;
+            position: absolute;
+            top: 170px;
+            left: 297px;
+        }
+        img{
+            vertical-align: top;
+            width: 536px;
+            height: 356px;
+        }
+        #txt{
+            width: 536px;
+            height: 71px;
+            position: absolute;
+            left: 297px;
+            bottom: 185px;
+            text-align: center;
+            font: 20px/71px "微软雅黑";
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="pic">
+        <a id="prev" href="javascript:;"></a>
+        <img id="img" src="pic-img/img1.jpg" alt="">
+        <a id="next" href="javascript:;"></a>
+    </div>
+    <p id="txt">这是第 <span>1</span> 张图片</p>
+</div>
+<script>
+let arr=[
+    {'img':'pic-img/img1.jpg','txt':'垃圾分类后都去哪了 “大手拉小手”来瞅瞅'},
+    {'img':'pic-img/img2.jpg','txt':'的哥的姐募集善款1.7万余元 '},
+    {'img':'pic-img/img3.jpg','txt':'小雨 中雨 大雨 本周迎接花式下雨'},
+    {'img':'pic-img/img4.jpg','txt':'新辟408M路、404M地铁五号线接驳线'},
+];
+let prev=document.getElementById('prev');
+let next=document.getElementById('next');
+let txt=document.getElementById('txt');
+let img=document.getElementById('img');
+let i=0;
+img.src=arr[i].img;
+txt.innerHTML=arr[i].txt;
+next.onclick=function () {
+    if(i<arr.length-1){
+        i+=1;
+
+    }
+    else {
+       i=0;
+    }
+    img.src=arr[i].img;
+    txt.innerHTML=arr[i].txt;
+
+
+};
+
+prev.onclick=function () {
+    if(i>0){
+        i-=1;
+    }
+    else {
+        i=arr.length-1;
+    }
+    img.src=arr[i].img;
+    txt.innerHTML=arr[i].txt;
+
+}
+
+</script>
+</body>
+</html>
