@@ -117,6 +117,7 @@ var txt=document.querySelector("#txt");
 var nav=document.querySelector("#navs");
 var nav_obj='';
 var current=0;
+var timer=null;
 
 function clearClass(obj){
     for (let i = 0; i < obj.length; i++) {
@@ -156,10 +157,16 @@ function play(){
         navs[i].onmouseover=function () {
             var cimg=this.querySelector('.img');
             cimg.style.display='block';
+            if(timer){
+                timer=clearInterval(timer);
+            }
         }
         navs[i].onmouseout=function () {
             var cimg=this.querySelector('.img');
             cimg.style.display='none';
+            if(!timer){
+                timer=setInterval(play,2000);
+            }
         }
         //实现点击缩略图切换
         navs[i].onclick=function () {
@@ -181,17 +188,54 @@ function play(){
         navs[current].className="active";
     }
 
+    next.onmouseover=function(){
+        if(timer){
+            timer=clearInterval(timer);
+        }
+
+    };
+
+    next.onmouseout=function(){
+        if(!timer){
+            timer=setInterval(play,2000);
+        }
+
+
+
+
+    }
+img.onmouseover=function () {
+    if(timer){
+        timer=clearInterval(timer);
+    }
+}
+
+    img.onmouseout=function () {
+        if(!timer){
+            timer=setInterval(play,2000);
+        }
+    }
+
+
 
     //上一个的功能
 
 
     prev.onclick=function () {
+        clearInterval(timer);
+
         current--;
         current=current<0?data.length-1:current;
         img.src=data[current].img;
         txt.innerText=data[current].txt;
         clearClass(navs);
         navs[current].className="active";
+    }
+    prev.onmouseout=function(){
+        if(!timer)
+        {
+            timer=setInterval(play,2000);
+        }
     }
     current++;
     current=current>data.length-1?0:current;
@@ -203,7 +247,7 @@ function play(){
 }
 
 //定时播放功能
-setInterval(play,2000);
+timer=setInterval(play,2000);
 </script>
 </body>
 </html>
