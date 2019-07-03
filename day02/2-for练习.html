@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #u{
+            width: 800px; height: 300px; margin: 0 auto; border: 1px solid #999999;
+        }
+        li{list-style-type: none; width: 250px; height: 300px; float: left; background-color: #bab3ce}
+        div{display: none; width: 210px; height: 260px; text-indent: 2em; overflow: hidden;  font-size: 14px; line-height: 25px; padding: 20px;}
+        div:nth-child(1){color: darkorange;}
+        div:nth-child(2){ color: lime}
+        div:nth-child(3){ color: #fff}
+    </style>
+</head>
+<body>
+<ul id="u">
+    <li style="background-color: #333333">
+        <div style="color: #e15671">昨日，良管委（指挥部）召开半年度工作会议。会议强调，要深入贯彻习近平总书记重要指示精神，认真贯彻落实省市区决策部署，始终坚持实干至上、行动至上，奋战到底、归零出发，全力以赴冲刺良渚古城遗址申遗、良渚古城遗址公园有限开放的“临门一脚”。张俊杰、陈寿田、金国平、吴来恩、蒋卫东参加会议。</div>
+    </li>
+    <li style="background-color: beige;">
+        <div style="color:tan">申遗指挥部成立以来，良管委（指挥部）以风风火火的速度、只争朝夕的精神、蹄疾步稳的状态，扎实推进文本修编、项目实施、风貌修复、遗产展示等基础工作。今年以来，良管委（指挥部）紧紧围绕区委、区政府提出两大目标任务，着眼大局，聚焦重点，积极落实良渚申遗和公园开放各项准备工作。良管委（指挥部）荣获“争做余杭铁军先锋、争当新时代发展排头兵”模范集体的称号，良博院新展陈获“全国十大精品陈列”，良博院讲解服务岗获“全国巾帼文明岗”。</div>
+    </li>
+    <li style="background-color: #e15671;">
+        <div style="color: #e5e5e5">会议强调，在攻坚良渚申遗和公园开放两大任务过程中，要协同协作、统一统筹，确保各项任务高标准、高质量落实。要亲力亲为、主动作为，把握细节、主动积极、迎难而上。要有序有力、果断果决，把工作抓在手上、落在行动上。要自觉遵纪、从严管理，提高廉洁自律意识，守牢廉政底线。要提振精神，砥砺奋进，为良渚遗址保护、传承、利用事业在新时代闯出一片新天地。</div>
+    </li>
+</ul>
+<script>
+    lis=document.getElementsByTagName('li');
+    var _this=null;
+    for (var i = 0; i < lis.length; i++) {
+        lis[i].onmouseover=function(){
+            _this=this;
+            show()
+
+        }
+        lis[i].onmouseout=function(){
+            _this=this;
+            hidden()
+
+        }
+
+
+    }
+    function hidden(){
+        _this.getElementsByTagName('div')[0].style.display='none';
+    }
+    function show(){
+        _this.getElementsByTagName('div')[0].style.display='block';
+    }
+</script>
+</body>
+</html>
