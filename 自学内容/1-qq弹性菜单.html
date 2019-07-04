@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        li{list-style-type: none;height: 25px; line-height: 25px; border-bottom: 1px solid #bab3ce; text-indent: 4em}
+        h3,ul{ margin: 0; padding: 0}
+        .list{ width: 200px;border: 1px solid #ff6600;}
+        h3{ background: url(img/ico1.gif) no-repeat 15px center; background-color:#bab3ce; border-bottom: 1px solid aliceblue; color: #000; height: 30px; line-height: 30px; text-align: center; font-size: 14px; font-weight: bold}
+        ul{display: none}
+        .active{ background: url("img/ico2.gif") no-repeat 15px center; background-color: tan}
+        .hover { background:#6FF; }
+    </style>
+</head>
+<body>
+<div class="list">
+    <div class="lis">
+        <h3>我的好友</h3>
+        <ul>
+            <li>项远东</li>
+            <li>章树春</li>
+            <li>王丽</li>
+            <li>王美婷</li>
+        </ul>
+    </div>
+    <div class="lis">
+        <h3>网站</h3>
+        <ul>
+            <li>俞俊</li>
+            <li>黄远</li>
+            <li>张毅</li>
+            <li>何丽</li>
+        </ul>
+    </div>
+    <div class="lis">
+        <h3>办公室</h3>
+        <ul>
+            <li>江舟</li>
+            <li>徐卫良</li>
+            <li>徐晖</li>
+            <li>何金子</li>
+        </ul>
+    </div>
+    <div class="lis">
+        <h3>黑名单</h3>
+        <ul>
+            <li>黄远</li>
+            <li>何丽</li>
+        </ul>
+    </div>
+</div>
+<script>
+var list=document.querySelector('.list');
+var lis=document.querySelectorAll('.lis');
+var h3=document.querySelectorAll('h3');
+var ul=document.querySelectorAll('ul');
+var li=document.querySelectorAll('li');
+lis[0].querySelector('ul').style.display='block';
+lis[0].querySelector('h3').className='active';
+console.log(h3);
+for (var i = 0; i <h3.length ; i++) {
+
+    h3[i].index=i;
+    h3[i].onclick=function () {
+        if(h3[this.index].className){
+            ul[this.index].style.display='none';
+            h3[this.index].className='';
+        }
+        else{
+            ul[this.index].style.display='block';
+            h3[this.index].className='active';
+
+        }
+
+
+    }
+
+
+}
+for (var i = 0; i <li.length ; i++) {
+    li[i].index=i;
+    li[i].onclick=function () {
+        for (var j = 0; j < li.length; j++) {
+            if(this!=li[j]){
+                li[j].className='';
+
+            }
+            else{
+                li[j].className='hover';
+            }
+        }
+
+    }
+}
+</script>
+</body>
+</html>
