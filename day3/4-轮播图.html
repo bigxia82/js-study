@@ -213,8 +213,7 @@
             //实现点击圆点切换
             navs[i].onclick = function () {
                 current = this.index;
-                img.src = data[current].img;
-                txt.innerText = data[current].txt;
+                changeData(current);
                 swap_point(navs);
 
             }
