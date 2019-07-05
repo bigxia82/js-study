@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .wrap {
+            width: 1000px;
+            height: 800px;
+            background: url(img/bg.jpg) no-repeat;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -500px;
+            margin-top: -400px;
+        }
+
+        #prev, #next {
+            position: absolute;
+            width: 25px;
+            height: 45px;
+            background: url(img/ar.png) no-repeat;
+
+            top: 155px;
+        }
+
+        #prev {
+            left: 13px;
+        }
+
+        #next {
+            transform: rotate(180deg);
+            right: 13px;
+        }
+
+        .pic {
+            width: 536px;
+            height: 356px;
+            position: absolute;
+            top: 170px;
+            left: 297px;
+        }
+
+        #img {
+            vertical-align: top;
+            width: 536px;
+            height: 356px;
+        }
+
+        #txt {
+            width: 536px;
+            height: 71px;
+            position: absolute;
+            left: 297px;
+            bottom: 185px;
+            text-align: center;
+            font: 20px/71px "微软雅黑";
+            color: #666;
+        }
+
+        #navs {
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+            z-index: 10;
+            width: 100%;
+            text-align: center;
+        }
+
+        #navs a {
+            margin: 0 3px;
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        #navs img {
+            position: absolute;
+            left: -17px;
+            top: -35px;
+            width: 40px;
+            display: none;
+            border: 2px solid #fff;
+        }
+
+        #navs .active {
+            background: #f60;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="pic">
+        <a id="prev" href="javascript:;"></a>
+        <img id="img" src="img/img1.jpg" alt="">
+        <a id="next" href="javascript:;"></a>
+        <nav id="navs">
+
+        </nav>
+    </div>
+    <p id="txt"></p>
+</div>
+<script>
+    //数据源
+    var data = [
+        {'img': 'img/img1.jpg', 'txt': '垃圾分类后都去哪了 “大手拉小手”来瞅瞅'},
+        {'img': 'img/img2.jpg', 'txt': '的哥的姐募集善款1.7万余元 '},
+        {'img': 'img/img3.jpg', 'txt': '小雨 中雨 大雨 本周迎接花式下雨'},
+        {'img': 'img/img4.jpg', 'txt': '新辟408M路、404M地铁五号线接驳线'},
+    ];
+    var prev = document.querySelector('#prev');
+    var next = document.querySelector('#next');
+    var img = document.querySelector("#img");
+    var txt = document.querySelector("#txt");
+    var nav = document.querySelector("#navs");
+
+    var current = 0;
+    var timer = null;
+
+    function swap_point(obj) {
+        /**
+         * 实现圆点切换
+         *
+         */
+        for (let i = 0; i < obj.length; i++) {
+            obj[i].classList.remove('active');
+            obj[current].classList.add('active');
+        }
+    }
+
+    function create_point() {
+        //生成圆点及缩略图
+        var nav_obj = '';
+        for (var i = 0; i < data.length; i++) {
+            if (i == 0) {
+                nav_obj += `<a class="active">
+                <img class="img" src="${data[i].img}" alt="">
+            </a>`;
+            } else {
+                nav_obj += `<a>
+                <img class="img" src="${data[i].img}" alt="">
+            </a>`;
+            }
+
+        }
+
+        return nav_obj;
+    }
+
+    function timerStop(){
+        //清除定时器
+        if (timer) {
+            timer = clearInterval(timer);
+        }
+    }
+
+    function timerStart(){
+        //开启定时器
+        if (!timer) {
+            timer = setInterval(play, 2000);
+        }
+    }
+
+    function changeData(current=0){
+        //实现图片和文字切换
+        img.src = data[current].img;
+        txt.innerText = data[current].txt;
+    }
+
+
+    nav.innerHTML = create_point();
+    changeData();
+
+    function play() {
+        /**
+         * 封闭轮播功能便于定时器的执行
+         * @type {string}
+         */
+        //初始化默认图片和文字
+       changeData(current);
+
+
+//实现圆点缩略图
+        var navs = document.querySelectorAll("#navs a");
+        for (var i = 0; i < navs.length; i++) {
+            navs[i].index = i;
+            //实现缩略图功能
+            navs[i].onmouseover = function () {
+                var cimg = this.querySelector('.img');
+                cimg.style.display = 'block';
+                timerStop()
+            }
+            navs[i].onmouseout = function () {
+                var cimg = this.querySelector('.img');
+                cimg.style.display = 'none';
+               timerStart()
+            }
+            //实现点击圆点切换
+            navs[i].onclick = function () {
+                current = this.index;
+                img.src = data[current].img;
+                txt.innerText = data[current].txt;
+                swap_point(navs);
+
+            }
+        }
+//下一个的功能
+        next.onclick = function () {
+            current++;
+            current = current > data.length - 1 ? 0 : current;
+            changeData(current);
+            swap_point(navs);
+        }
+
+
+
+        //鼠标移到下一个按钮定时器停止
+        next.onmouseover = function () {
+            timerStop()
+
+        };
+
+        next.onmouseout = function () {
+           timerStart()
+
+
+        }
+        //鼠标移到图片上定时器停止
+        img.onmouseover = function () {
+           timerStop()
+        }
+
+        img.onmouseout = function () {
+           timerStart()
+        }
+
+
+        //上一个的功能
+
+
+        prev.onclick = function () {
+            current--;
+            current = current < 0 ? data.length - 1 : current;
+            changeData(current);
+            swap_point(navs);
+        }
+
+        //鼠标移到上一个按钮定时器停止
+        prev.onmouseover = function () {
+            timerStop()
+
+        };
+        prev.onmouseout = function () {
+           timerStart()
+        }
+        current++;
+        current = current > data.length - 1 ? 0 : current;
+        changeData(current);
+        swap_point(navs);
+
+
+    }
+
+    //定时播放功能
+    timer = setInterval(play, 2000);
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin: 0;
+            background-color: rgb(211, 241, 213);
+        }
+        .wrap{ width: 500px; height: 500px; margin: 0 auto; position: relative;}
+        .wrap div{
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            position: absolute;
+            background: url("img.jpg");
+            background-size:1000% 1000% ;
+            border: 1px dashed #ccc;
+
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+
+</div>
+<script>
+    var wrap=document.querySelector('.wrap');
+    var html='';
+    var w=50;
+    var h=50;
+    for (var i = 0; i < 100; i++) {
+        var x=i%10; //每一行的第几
+        var y=parseInt(i/10); //第几行
+        console.log(y);
+        html+=`<div style="left:${x*w}px;top:${y*h}px;background-position:-${x*w}px -${y*h}px">${i}</div>`
+    }
+    wrap.innerHTML=html;
+</script>
+</body>
+</html>

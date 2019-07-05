@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title></title>
+    <link rel="stylesheet" href="./radio.css">
+</head>
+
+<body>
+<div class="box">
+    <div class="option">
+        <a href="javascript:;" class="checked">男</a>
+        <a href="javascript:;">女</a>
+        <a href="javascript:;">保密</a>
+    </div>
+</div>
+<script>
+    var radio=document.querySelectorAll(".option a");
+    for (var i = 0; i <radio.length ; i++) {
+        radio[i].index=i;
+        radio[i].onclick=function () {
+            for (var i = 0; i <radio.length ; i++) {
+               /* if(this==radio[i]){
+                    radio[i].classList.add('checked');
+                }
+                else{
+                    radio[i].classList.remove('checked');
+                }*/
+               var checked=document.querySelector('.option .checked');//先获取已经是有checked样式的对象，并把其样式去掉,再把当前点的链接加上
+               checked.classList.remove('checked');
+               this.classList.add('checked');
+            }
+        }
+    }
+</script>
+</body>
+
+</html>

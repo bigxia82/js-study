@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .main{
+            margin: 0;
+            padding: 0;
+            width: 245px; height: 200px;
+            border: 1px solid #bab3ce;
+        }
+        .top li{ width: 80px; height: 30px; line-height: 30px; border: 1px solid #bab3ce; border-top:none;  text-align: center; float: left; list-style-type: none}
+        .content{ width: 214px; height: 150px;  border-top:none; clear: both; display: none; padding: 10px;  }
+        .top li.active{ border-bottom: none;}
+        .top li:nth-child(1){border-left: none}
+        .top li:nth-child(3){border-right: none}
+        .show{ display: block}
+        .hide{ display: none;}
+    </style>
+</head>
+<body>
+<div class="main">
+
+    <div class="top">
+        <li >生活</li>
+        <li>历史</li>
+        <li>新闻</li>
+    </div>
+    <div class="content">
+        这是生活标签
+    </div>
+    <div class="content">
+        这是历史标签
+    </div>
+    <div class="content">
+        这是新闻标签
+    </div>
+
+</div>
+
+
+
+    <script>
+        var lis=document.querySelectorAll('li');
+        var content=document.querySelectorAll('.content');
+        var current=0;
+        lis[current].classList.add('active');
+        content[current].classList.add('show');
+
+        for (var i = 0; i <lis.length ; i++) {
+            lis[i].index=i;
+            lis[i].onclick=tab;
+        }
+        function tab() {
+            //清除历史选中
+            lis[current].classList.remove('active');
+            content[current].classList.remove('show');
+            this.classList.add('active');
+            content[this.index].classList.add('show');
+            current=this.index;
+        }
+    </script>
+</body>
+</html>
